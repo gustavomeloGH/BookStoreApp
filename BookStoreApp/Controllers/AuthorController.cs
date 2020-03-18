@@ -6,6 +6,7 @@ namespace BookStoreApp.Controllers
     [RoutePrefix("autores")]
     public class AuthorController : Controller
     {
+        [Route("")]
         [Route("listar")]
         public ActionResult Index()
         {
@@ -29,5 +30,6 @@ namespace BookStoreApp.Controllers
         {
             return View();
         }
+        
     }
 }

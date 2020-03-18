@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using BookStoreApp.RoutesConstraints;
 using System.Web.Mvc;
+using System.Web.Mvc.Routing;
 using System.Web.Routing;
 
 namespace BookStoreApp
@@ -13,6 +11,10 @@ namespace BookStoreApp
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            var constaintsResolver = new DefaultInlineConstraintResolver();
+            constaintsResolver.ConstraintMap.Add("values", typeof(ValuesConstraint));
+            
+            //routes.MapMvcAttributeRoutes(constaintsResolver);
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
