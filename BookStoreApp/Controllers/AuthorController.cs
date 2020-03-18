@@ -5,7 +5,7 @@ namespace BookStoreApp.Controllers
 {
 
     [RoutePrefix("autores")]
-    [LogActionFilters()]
+    //[LogActionFilters()]
     public class AuthorController : Controller
     {
         [Route("")]
