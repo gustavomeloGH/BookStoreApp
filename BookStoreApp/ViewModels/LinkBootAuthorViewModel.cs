@@ -6,11 +6,11 @@ using System.Web;
 
 namespace BookStoreApp.ViewModels
 {
-    public class LinkBootActorViewModel
+    public class LinkBootAuthorViewModel
     {
 
         [Required(ErrorMessage = "*")]
-        public int ActorId { get; set; }
+        public int AuthorId { get; set; }
 
         [Required(ErrorMessage = "*")]
         public int BookId { get; set; }

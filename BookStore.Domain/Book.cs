@@ -8,7 +8,7 @@ namespace BookStorage.Models
 
         public Book()
         {
-            this.Actors = new List<Actor>();
+            this.Authors = new List<Author>();
         }
 
         public int Id { get; set; }
@@ -17,6 +17,6 @@ namespace BookStorage.Models
         public DateTime ReleaseDate { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
-        public virtual ICollection<Actor> Actors { get; set; }
+        public virtual ICollection<Author> Authors { get; set; }
     }
 }

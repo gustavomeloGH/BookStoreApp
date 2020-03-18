@@ -8,7 +8,7 @@
         public override void Up()
         {
             CreateTable(
-                "dbo.Actor",
+                "dbo.Author",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -40,32 +40,32 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.BookActor",
+                "dbo.BookAuthor",
                 c => new
                     {
-                        Actor_Id = c.Int(nullable: false),
+                        Author_Id = c.Int(nullable: false),
                         Book_Id = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Actor_Id, t.Book_Id })
-                .ForeignKey("dbo.Actor", t => t.Actor_Id, cascadeDelete: true)
+                .PrimaryKey(t => new { t.Author_Id, t.Book_Id })
+                .ForeignKey("dbo.Author", t => t.Author_Id, cascadeDelete: true)
                 .ForeignKey("dbo.Book", t => t.Book_Id, cascadeDelete: true)
-                .Index(t => t.Actor_Id)
+                .Index(t => t.Author_Id)
                 .Index(t => t.Book_Id);
             
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.BookActor", "Book_Id", "dbo.Book");
-            DropForeignKey("dbo.BookActor", "Actor_Id", "dbo.Actor");
+            DropForeignKey("dbo.BookAuthor", "Book_Id", "dbo.Book");
+            DropForeignKey("dbo.BookAuthor", "Author_Id", "dbo.Author");
             DropForeignKey("dbo.Book", "CategoryId", "dbo.Category");
-            DropIndex("dbo.BookActor", new[] { "Book_Id" });
-            DropIndex("dbo.BookActor", new[] { "Actor_Id" });
+            DropIndex("dbo.BookAuthor", new[] { "Book_Id" });
+            DropIndex("dbo.BookAuthor", new[] { "Author_Id" });
             DropIndex("dbo.Book", new[] { "CategoryId" });
-            DropTable("dbo.BookActor");
+            DropTable("dbo.BookAuthor");
             DropTable("dbo.Category");
             DropTable("dbo.Book");
-            DropTable("dbo.Actor");
+            DropTable("dbo.Author");
         }
     }
 }

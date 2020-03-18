@@ -2,10 +2,10 @@
 
 namespace BookStorage.Models
 {
-    public class Actor
+    public class Author
     {
 
-        public Actor()
+        public Author()
         {
             this.Books = new List<Book>();
         }

@@ -11,14 +11,14 @@ namespace BookStorage.Context
         {
         }
 
-        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
-            modelBuilder.Configurations.Add(new ActorMap());
+            modelBuilder.Configurations.Add(new AuthorMap());
             modelBuilder.Configurations.Add(new BookMap());
 
         }

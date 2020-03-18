@@ -13,7 +13,7 @@ namespace BookStoreApp.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202003161758083_v1"; }
+            get { return "202003172319344_v1"; }
         }
         
         string IMigrationMetadata.Source
