@@ -1,9 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using BookStoreApp.FIlters;
+using System.Web.Mvc;
 
 namespace BookStoreApp.Controllers
 {
 
     [RoutePrefix("autores")]
+    [LogActionFilters()]
     public class AuthorController : Controller
     {
         [Route("")]

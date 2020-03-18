@@ -186,6 +186,7 @@
     <Compile Include="Context\BookStoreDataContext.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="FIlters\LogActionFilters.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
