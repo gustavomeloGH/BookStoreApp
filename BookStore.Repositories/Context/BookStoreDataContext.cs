@@ -1,12 +1,13 @@
 ﻿using BookStorage.Models;
+using BookStore.Persistence.Mapping;
 using System.Data.Entity;
 
-namespace BookStoreApp
+namespace BookStore.Persistence.Context
 {
 
     public class BookStoreDataContext : DbContext
     {
-        public BookStoreDataContext() : base("DefaultConnection")
+        public BookStoreDataContext() : base("BookStoreConnectionString")
         {
         }
 

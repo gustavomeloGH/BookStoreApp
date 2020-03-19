@@ -1,4 +1,4 @@
-﻿using BookStoreApp.FIlters;
+﻿using BookStorage.Models;
 using System.Web.Mvc;
 
 namespace BookStoreApp.Controllers
@@ -8,30 +8,55 @@ namespace BookStoreApp.Controllers
     //[LogActionFilters()]
     public class AuthorController : Controller
     {
+        private IAuthorRepository _repository;    
+
+        public AuthorController(IAuthorRepository repository)
+        {
+            _repository = repository;
+        }
+
         [Route("")]
         [Route("listar")]
         public ActionResult Index()
         {
-            return View();
+            var authorList = _repository.Get();
+            return View(authorList);
         }
 
         [Route("criar")]
-        public ActionResult Create()
+        [HttpPost]
+        public ActionResult Create(Author author)
         {
-            return View();
+            if (_repository.Create(author))
+            {
+                return RedirectToAction("Index");
+            }
+            return View(author);
         }
         
         [Route("editar/{id:int}")]
         public ActionResult Edit(int id)
         {
-            return View();
+            var author = _repository.Get(id);
+            return View(author);
         }
 
         [Route("excluir/{id:int}")]
         public ActionResult Delete(int id)
         {
-            return View();
+            var author = _repository.Get(id);
+            return View(author);
         }
-        
+
+
+        [Route("excluir/{id:int}")]
+        [HttpPost]
+        [ActionName("Delete")]
+        public ActionResult DeleteConfirm(int id)
+        {
+            _repository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

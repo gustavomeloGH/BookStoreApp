@@ -1,7 +1,7 @@
 ﻿using BookStorage.Models;
 using System.Data.Entity.ModelConfiguration;
 
-namespace BookStoreApp
+namespace BookStore.Persistence.Mapping
 {
     public class AuthorMap
         : EntityTypeConfiguration<Author>

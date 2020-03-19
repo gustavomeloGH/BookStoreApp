@@ -1,9 +1,8 @@
-﻿namespace BookStoreApp.Migrations
+﻿namespace BookStore.Persistence.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
-    public partial class v1 : DbMigration
+
+    public partial class InitialMigrationV1 : DbMigration
     {
         public override void Up()
         {
@@ -40,7 +39,7 @@
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.BookAuthor",
+                "dbo.BookAuthorDB",
                 c => new
                     {
                         Author_Id = c.Int(nullable: false),
@@ -56,13 +55,13 @@
         
         public override void Down()
         {
-            DropForeignKey("dbo.BookAuthor", "Book_Id", "dbo.Book");
-            DropForeignKey("dbo.BookAuthor", "Author_Id", "dbo.Author");
+            DropForeignKey("dbo.BookAuthorDB", "Book_Id", "dbo.Book");
+            DropForeignKey("dbo.BookAuthorDB", "Author_Id", "dbo.Author");
             DropForeignKey("dbo.Book", "CategoryId", "dbo.Category");
-            DropIndex("dbo.BookAuthor", new[] { "Book_Id" });
-            DropIndex("dbo.BookAuthor", new[] { "Author_Id" });
+            DropIndex("dbo.BookAuthorDB", new[] { "Book_Id" });
+            DropIndex("dbo.BookAuthorDB", new[] { "Author_Id" });
             DropIndex("dbo.Book", new[] { "CategoryId" });
-            DropTable("dbo.BookAuthor");
+            DropTable("dbo.BookAuthorDB");
             DropTable("dbo.Category");
             DropTable("dbo.Book");
             DropTable("dbo.Author");
