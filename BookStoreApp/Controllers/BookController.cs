@@ -9,23 +9,26 @@ namespace BookStoreApp.Controllers
     public class BookController : Controller
     {
 
-        private BookStoreDataContext _db;
+        private IRepository<Book> _bookRepository;
+        private IRepository<Category> _categoryRepository;
 
-        public BookController(BookStoreDataContext context)
+        public BookController(IRepository<Book> bookRepository,
+                              IRepository<Category> categoryRepository)
         {
-            this._db = context;
+            this._bookRepository = bookRepository;
+            this._categoryRepository = categoryRepository;
         }
 
         [Route("listar")]
         public ActionResult Index()
         {
-            return View(_db.Books.ToList());
+            return View(_bookRepository.List());
         }
 
         [Route("criar")]
         public ActionResult Create()
         {
-            var categories = _db.Categories.ToList();
+            var categories = _categoryRepository.List();
 
             var model = new EditorBookViewModel
             {
@@ -47,8 +50,7 @@ namespace BookStoreApp.Controllers
             book.ISBN = model.ISBN;
             book.ReleaseDate = model.ReleaseDate;
             book.CategoryId = model.CategoryId;
-            _db.Books.Add(book);
-            _db.SaveChanges();
+            _bookRepository.Create(book);
 
             return RedirectToAction("Index");
         }
@@ -57,8 +59,8 @@ namespace BookStoreApp.Controllers
         [Route("editar")]
         public ActionResult Edit(int id)
         {
-            var categories = _db.Categories.ToList();
-            var book = _db.Books.Find(id);
+            var categories = _categoryRepository.List();
+            var book = _bookRepository.Get(id);
 
             var model = new EditorBookViewModel
             {
@@ -75,14 +77,13 @@ namespace BookStoreApp.Controllers
         [HttpPost]
         public ActionResult Edit(EditorBookViewModel model)
         {
-            var book = _db.Books.Find(model.Id);
+            var book = _bookRepository.Get(model.Id);
             book.Name = model.Name;
             book.ISBN = model.ISBN;
             book.ReleaseDate = model.ReleaseDate;
             book.CategoryId = model.CategoryId;
 
-            _db.Entry<Book>(book).State = System.Data.Entity.EntityState.Modified;
-            _db.SaveChanges();
+            _bookRepository.Update(book);
 
             return RedirectToAction("Index");
         }

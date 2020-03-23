@@ -8,9 +8,9 @@ namespace BookStoreApp.Controllers
     //[LogActionFilters()]
     public class AuthorController : Controller
     {
-        private IAuthorRepository _repository;    
+        private IRepository<Author> _repository;    
 
-        public AuthorController(IAuthorRepository repository)
+        public AuthorController(IRepository<Author> repository)
         {
             _repository = repository;
         }
@@ -19,7 +19,7 @@ namespace BookStoreApp.Controllers
         [Route("listar")]
         public ActionResult Index()
         {
-            var authorList = _repository.Get();
+            var authorList = _repository.List();
             return View(authorList);
         }
 

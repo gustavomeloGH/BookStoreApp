@@ -3,16 +3,11 @@ using System.Data.Entity;
 using System.Linq;
 using BookStorage.Models;
 
-namespace BookStoreApp
+namespace BookStoreApp.Repository
 {
-    public class AuthorRepository : IAuthorRepository
+    public class AuthorRepository : IRepository<Author>
     {
         private BookStoreDataContext _db;
-
-        public AuthorRepository(BookStoreDataContext context)
-        {
-            _db = context;
-        }
 
         public bool Create(Author author)
         {
@@ -41,7 +36,7 @@ namespace BookStoreApp
                 return false;
             }
         }
-        
+
         public void Delete(int id)
         {
             var author = _db.Authors.Find(id);
@@ -49,7 +44,7 @@ namespace BookStoreApp
             _db.SaveChanges();
         }
 
-        public List<Author> Get()
+        public List<Author> List()
         {
             return _db.Authors.ToList();
         }
@@ -61,13 +56,12 @@ namespace BookStoreApp
 
         public List<Author> Get(string name)
         {
-            return _db.Authors.Where(x => x.Name.Contains(name)).ToList() ;
+            return _db.Authors.Where(x => x.Name.Contains(name)).ToList();
         }
 
         public void Dispose()
         {
             _db.Dispose();
         }
-
     }
 }
